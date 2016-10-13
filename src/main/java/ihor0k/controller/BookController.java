@@ -41,9 +41,13 @@ public class BookController {
                           @RequestParam("author") String author,
                           @RequestParam("description") String description,
                           @RequestParam("file") CommonsMultipartFile file) {
-        System.out.println(file.getBytes().length);
-        Book book = new Book(title, author, description, file.getOriginalFilename());
-        storageService.store(file);
+        Book book;
+        if (file.getSize() == 0)
+            book = new Book(title, author, description, null);
+        else {
+            book = new Book(title, author, description, file.getOriginalFilename());
+            storageService.store(file);
+        }
         bookService.addBook(book);
         return "redirect:/";
     }
@@ -57,7 +61,13 @@ public class BookController {
     @RequestMapping(value = "/book/{id}/edit", method = RequestMethod.GET)
     public String editBook(@PathVariable int id, Model model) {
         model.addAttribute("book", bookService.getBook(id));
-        return "addBook";
+        return "editBook";
+    }
+
+    @RequestMapping(value = "/book/{id}/edit", method = RequestMethod.POST)
+    public String editBook(@ModelAttribute Book book) {
+        bookService.updateBook(book);
+        return "redirect:/book/" + book.getId();
     }
 
     @RequestMapping(value = "/book/{id}/remove", method = RequestMethod.GET)
