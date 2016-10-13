@@ -18,7 +18,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
-        sessionFactory = sessionFactory;
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
@@ -39,7 +39,6 @@ public class BookDAOImpl implements BookDAO {
     public void removeBook(int id) {
         Session session = sessionFactory.getCurrentSession();
         Book book = session.load(Book.class, new Integer(id));
-
         if (book != null) {
             session.delete(book);
         }

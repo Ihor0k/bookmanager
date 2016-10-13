@@ -18,7 +18,17 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <!--<mvc:view-controller path="/" view-name="/index"/>-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="4294967296"/> <!--4GB-->
+        <property name="maxInMemorySize" value="1048576"/>  <!--1MB-->
+    </bean>
+
+
+    <bean id="fileSystemStorageService" class="ihor0k.storage.FileSystemStorageService" init-method="init">
+        <property name="rootLocation" value="D:\bookmanager files\"/>
+    </bean>
+
+    <!--<mvc:view-controller filename="/" view-name="/index"/>-->
 
     <context:component-scan base-package="ihor0k"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>

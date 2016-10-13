@@ -28,14 +28,14 @@
                 <td><a href="/book/${book.id}">${book.title}</a></td>
                 <td>${book.author}</td>
                 <td>${book.description}</td>
-                <td><a href="/edit/${book.id}">Edit</a></td>
-                <td><a href="/remove/${book.id}">Remove</a></td>
+                <td><a href="/book/${book.id}/edit">Edit</a></td>
+                <td><a href="/book/${book.id}/remove">Remove</a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
 
-<h1><a href="<c:url value="/add"/>">Add a Book</a> </h1>
+<h1><a href="<c:url value="/book/new"/>">Add a Book</a> </h1>
 
 </body>
 </html>

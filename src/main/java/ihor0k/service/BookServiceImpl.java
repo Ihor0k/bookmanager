@@ -12,38 +12,39 @@ import java.util.List;
 public class BookServiceImpl implements BookService {
     private BookDAO bookDAO;
 
-    @Autowired
-    public void setBookDAO(BookDAO bookDAO) {
-        this.bookDAO = bookDAO;
-    }
-
     @Override
     @Transactional
     public void addBook(Book book) {
-        this.bookDAO.addBook(book);
+        bookDAO.addBook(book);
     }
 
     @Override
     @Transactional
     public void updateBook(Book book) {
-        this.bookDAO.updateBook(book);
+        bookDAO.updateBook(book);
     }
 
     @Override
     @Transactional
     public void removeBook(int id) {
-        this.bookDAO.removeBook(id);
+        bookDAO.removeBook(id);
     }
 
     @Override
     @Transactional
     public Book getBook(int id) {
-        return this.bookDAO.getBook(id);
+        return bookDAO.getBook(id);
     }
 
     @Override
     @Transactional
     public List<Book> getAllBooks() {
-        return this.bookDAO.getAllBooks();
+        return bookDAO.getAllBooks();
+    }
+
+
+    @Autowired
+    public void setBookDAO(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
 }

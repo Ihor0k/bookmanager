@@ -19,8 +19,18 @@ public class Book {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "file")
-    private byte[] file;
+    @Column(name = "filename")
+    private String filename;
+
+    public Book() {
+    }
+
+    public Book(String title, String author, String description, String filename) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.filename = filename;
+    }
 
     public int getId() {
         return id;
@@ -54,12 +64,12 @@ public class Book {
         this.description = description;
     }
 
-    public byte[] getFile() {
-        return file;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setFile(byte[] file) {
-        this.file = file;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     @Override
@@ -68,6 +78,31 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
+                ", description='" + description + '\'' +
+                ", filename='" + filename + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (!title.equals(book.title)) return false;
+        if (!author.equals(book.author)) return false;
+        if (description != null ? !description.equals(book.description) : book.description != null) return false;
+        return filename != null ? filename.equals(book.filename) : book.filename == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + author.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (filename != null ? filename.hashCode() : 0);
+        return result;
     }
 }
