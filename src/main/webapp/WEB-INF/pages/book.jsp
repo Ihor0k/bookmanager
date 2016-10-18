@@ -28,7 +28,7 @@
         <td>${book.author}</td>
         <td>${book.description}</td>
         <c:if test="${book.filename != null}">
-            <td><a href="/file/${book.filename}">Download</a></td>
+            <td><a href="/file/${book.filename}">View</a></td>
         </c:if>
     </tr>
 </table>
