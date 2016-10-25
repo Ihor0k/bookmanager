@@ -32,16 +32,15 @@ public class BookDAOImpl implements BookDAO {
     public void updateBook(Book book) {
         Session session = sessionFactory.getCurrentSession();
         session.update(book);
-        logger.info("Book successfully update. Book details: " + book);
+        logger.info("Book successfully updated. Book details: " + book);
     }
 
     @Override
     public void removeBook(int id) {
         Session session = sessionFactory.getCurrentSession();
         Book book = session.load(Book.class, new Integer(id));
-        if (book != null) {
+        if (book != null)
             session.delete(book);
-        }
         logger.info("Book successfully removed. Book details: " + book);
     }
 

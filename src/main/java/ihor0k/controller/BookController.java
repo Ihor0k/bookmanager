@@ -1,11 +1,14 @@
 package ihor0k.controller;
 
 import ihor0k.model.Book;
+import ihor0k.model.User;
 import ihor0k.service.BookService;
 import ihor0k.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,23 +34,23 @@ public class BookController {
         return new FileSystemResource(storageService.load(fileName));
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping(value = "book/new", method = RequestMethod.GET)
     public String addBook() {
         return "addBook";
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping(value = "book/new", method = RequestMethod.POST)
     public String addBook(@RequestParam("title") String title,
                           @RequestParam("author") String author,
                           @RequestParam("description") String description,
                           @RequestParam("file") CommonsMultipartFile file) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Book book;
-        if (file.getSize() == 0)
-            book = new Book(title, author, description, null);
-        else {
-            book = new Book(title, author, description, file.getOriginalFilename());
-            storageService.store(file);
-        }
+        book = new Book(title, author, description, file.getOriginalFilename());
+        book.setUser(user);
+        storageService.store(file);
         bookService.addBook(book);
         return "redirect:/";
     }

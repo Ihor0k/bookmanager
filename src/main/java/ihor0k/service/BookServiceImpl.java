@@ -42,7 +42,6 @@ public class BookServiceImpl implements BookService {
         return bookDAO.getAllBooks();
     }
 
-
     @Autowired
     public void setBookDAO(BookDAO bookDAO) {
         this.bookDAO = bookDAO;

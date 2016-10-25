@@ -22,6 +22,10 @@ public class Book {
     @Column(name = "filename")
     private String filename;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Book() {
     }
 
@@ -72,15 +76,12 @@ public class Book {
         this.filename = filename;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", description='" + description + '\'' +
-                ", filename='" + filename + '\'' +
-                '}';
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -93,7 +94,8 @@ public class Book {
         if (!title.equals(book.title)) return false;
         if (!author.equals(book.author)) return false;
         if (description != null ? !description.equals(book.description) : book.description != null) return false;
-        return filename != null ? filename.equals(book.filename) : book.filename == null;
+        if (!filename.equals(book.filename)) return false;
+        return user.equals(book.user);
 
     }
 
@@ -102,7 +104,17 @@ public class Book {
         int result = title.hashCode();
         result = 31 * result + author.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (filename != null ? filename.hashCode() : 0);
+        result = 31 * result + filename.hashCode();
+        result = 31 * result + user.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                '}';
     }
 }

@@ -2,6 +2,7 @@ package hibernate;
 
 import ihor0k.DAO.BookDAO;
 import ihor0k.model.Book;
+import ihor0k.model.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,10 +29,13 @@ public class HibernateTest {
         book.setAuthor("author");
         book.setDescription("description");
         book.setFilename("path");
+        book.setUser(new User());
         bookDAOImpl.addBook(book);
         List<Book> booksList = bookDAOImpl.getAllBooks();
         Assert.assertEquals(book.getTitle(), booksList.get(booksList.indexOf(book)).getTitle());
     }
+
+
 
     @Autowired
     @Qualifier(value = "bookDAOImpl")

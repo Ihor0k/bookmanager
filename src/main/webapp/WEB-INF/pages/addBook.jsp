@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../resources/css/main.css">
 </head>
 <body>
-<form:form method="POST" enctype="multipart/form-data">
+<form:form method="POST" enctype="multipart/form-data" acceptCharset="UTF-8">
     <table class="tg">
         <tr>
             <td>Title</td>

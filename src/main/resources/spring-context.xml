@@ -28,8 +28,6 @@
         <property name="rootLocation" value="D:\bookmanager files\"/>
     </bean>
 
-    <!--<mvc:view-controller filename="/" view-name="/index"/>-->
-
     <context:component-scan base-package="ihor0k"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <mvc:default-servlet-handler/>
