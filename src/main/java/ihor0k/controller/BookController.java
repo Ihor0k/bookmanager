@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+
 @Controller
 public class BookController {
     private BookService bookService;
@@ -33,10 +36,18 @@ public class BookController {
     public String addBook(@RequestParam("title") String title,
                           @RequestParam("author") String author,
                           @RequestParam("description") String description,
-                          @RequestParam("file") CommonsMultipartFile file) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Book book = new Book(title, author, description, file.getOriginalFilename(), user);
-        bookService.addBook(book, file);
+                          @RequestParam("file") CommonsMultipartFile multipartFile) {
+        try {
+            String filename = multipartFile.getOriginalFilename();
+            File file = new File(filename);
+            multipartFile.transferTo(file);
+
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Book book = new Book(title, author, description, file.getName(), user);
+            bookService.addBook(book, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "redirect:/";
     }
 

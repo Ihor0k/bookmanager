@@ -7,7 +7,7 @@ import java.io.File;
 public interface StorageService {
     void init();
 
-    void store(MultipartFile file);
+    void store(File file);
 
     File load(String fileName);
 
