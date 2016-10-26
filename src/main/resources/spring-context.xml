@@ -24,7 +24,7 @@
     </bean>
 
 
-    <bean id="fileSystemStorageService" class="ihor0k.storage.FileSystemStorageService" init-method="init">
+    <bean id="fileSystemStorageService" class="ihor0k.service.storage.FileSystemStorageService" init-method="init">
         <property name="rootLocation" value="D:\bookmanager files\"/>
     </bean>
 

@@ -1,4 +1,4 @@
-package ihor0k.storage;
+package ihor0k.service.storage;
 
 public class StorageFileNotFoundException extends StorageException {
 

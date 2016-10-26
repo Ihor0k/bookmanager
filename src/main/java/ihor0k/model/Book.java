@@ -29,11 +29,12 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String author, String description, String filename) {
+    public Book(String title, String author, String description, String filename, User user) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.filename = filename;
+        this.user = user;
     }
 
     public int getId() {

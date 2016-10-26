@@ -1,4 +1,4 @@
-package ihor0k.storage;
+package ihor0k.service.storage;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
@@ -38,6 +38,16 @@ public class FileSystemStorageService implements StorageService {
         if (file.exists())
             return file;
         else throw new StorageFileNotFoundException("Could not read file: " + fileName);
+    }
+
+    @Override
+    public void delete(String filename) {
+        File file = rootLocation.resolve(filename).toFile();
+        if (file.exists()) {
+            if (!file.delete())
+                throw new StorageException("Could not delete file: " + filename);
+        } else
+            throw new StorageFileNotFoundException("File '" + file + "' not found");
     }
 
     @Override
