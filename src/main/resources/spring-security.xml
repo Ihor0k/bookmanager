@@ -19,7 +19,6 @@
                 logout-url="/j_spring_security_logout"
                 logout-success-url="/"/>
 
-        <remember-me/>
         <csrf disabled="true"/>
     </http>
 
