@@ -19,11 +19,11 @@ public class Book {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "filename")
+    @Column(name = "filename", updatable = false)
     private String filename;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", updatable = false)
     private User user;
 
     public Book() {
@@ -116,6 +116,7 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
+                ", filename='" + filename + '\'' +
                 '}';
     }
 }

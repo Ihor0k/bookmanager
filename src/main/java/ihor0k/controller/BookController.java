@@ -41,7 +41,6 @@ public class BookController {
             String filename = multipartFile.getOriginalFilename();
             File file = new File(filename);
             multipartFile.transferTo(file);
-
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             Book book = new Book(title, author, description, file.getName(), user);
             bookService.addBook(book, file);
@@ -57,18 +56,21 @@ public class BookController {
         return "book";
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping(value = "/book/{id}/edit", method = RequestMethod.GET)
     public String editBook(@PathVariable int id, Model model) {
         model.addAttribute("book", bookService.getBook(id));
         return "editBook";
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping(value = "/book/{id}/edit", method = RequestMethod.POST)
     public String editBook(@ModelAttribute Book book) {
         bookService.updateBook(book);
         return "redirect:/book/" + book.getId();
     }
 
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping(value = "/book/{id}/remove", method = RequestMethod.GET)
     public String removeBook(@PathVariable("id") int id) {
         bookService.removeBook(id);
@@ -76,7 +78,7 @@ public class BookController {
     }
 
     @Autowired
-    @Qualifier(value = "bookServiceImpl")
+    @Qualifier("bookServiceImpl")
     public void setBookService(BookService bookService) {
         this.bookService = bookService;
     }
