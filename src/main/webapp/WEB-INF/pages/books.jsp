@@ -7,7 +7,7 @@
     <jsp:attribute name="title">Books</jsp:attribute>
 
     <jsp:body>
-        <c:if test="${!empty listBooks}">
+        <c:if test="${!empty bookList}">
             <h2>Book List</h2>
             <table class="tg">
                 <tr>
@@ -21,7 +21,7 @@
                     </security:authorize>
                 </tr>
 
-                <c:forEach var="book" items="${listBooks}">
+                <c:forEach var="book" items="${bookList}">
                     <tr>
                         <td>${book.id}</td>
                         <td><a href="/book/${book.id}">${book.title}</a></td>

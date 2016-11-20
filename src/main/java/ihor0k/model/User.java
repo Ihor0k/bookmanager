@@ -24,7 +24,7 @@ public class User implements UserDetails{
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Book> books;
 
     @Enumerated(value = EnumType.STRING)

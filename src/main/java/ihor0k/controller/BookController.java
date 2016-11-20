@@ -20,8 +20,8 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String listBooks(Model model) {
-        model.addAttribute("listBooks", bookService.getAllBooks());
+    public String bookList(Model model) {
+        model.addAttribute("bookList", bookService.getAllBooks());
         return "books";
     }
 

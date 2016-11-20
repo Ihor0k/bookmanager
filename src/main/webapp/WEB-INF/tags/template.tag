@@ -17,12 +17,12 @@
 
 <body>
 
-<c:set var="username" scope="session" value="anonym"/>
+<c:set var="currentUser" scope="session" value="anonym"/>
 <security:authorize access="isAuthenticated()" var="isAuthenticated">
-    <security:authentication property="principal.username" var="username"/>
+    <security:authentication property="principal.username" var="currentUser"/>
 </security:authorize>
 
-<h5>Hello, ${username}</h5>
+<h5>Hello, ${currentUser}</h5>
 
 <c:url value="/j_spring_security_logout" var="logout"/>
 <c:url value="/login" var="login"/>
