@@ -5,7 +5,7 @@
     <jsp:attribute name="title">${book.title}}</jsp:attribute>
 
     <jsp:body>
-        <h1>Book Details</h1>
+        <h3>Book Details</h3>
 
         <table class="tg">
             <tr>

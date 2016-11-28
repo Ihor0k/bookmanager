@@ -11,24 +11,34 @@
         <jsp:invoke fragment="title"/>
     </title>
 
-    <spring:url value="/resources/css/main.css" var="stylesheet"/>
+    <spring:url value="/resources/css/style.css" var="stylesheet"/>
     <link rel="stylesheet" href="${stylesheet}">
 </head>
 
 <body>
 
 <c:set var="currentUser" scope="session" value="anonym"/>
-<security:authorize access="isAuthenticated()" var="isAuthenticated">
+<c:url value="/login" var="log"/>
+<c:set var="logText" scope="session" value="Log in"/>
+<security:authorize access="isAuthenticated()">
     <security:authentication property="principal.username" var="currentUser"/>
+    <c:url var="log" value="/j_spring_security_logout"/>
+    <c:set var="logText" value="Log out"/>
 </security:authorize>
 
-<h5>Hello, ${currentUser}</h5>
+<div id="header">
+    <ul>
+        <li id="greeting">
+            Hello, ${currentUser}
+        </li>
+        <li id="log_text">
+            <a href="${log}">${logText}</a>
+        </li>
+    </ul>
+</div>
 
-<c:url value="/j_spring_security_logout" var="logout"/>
-<c:url value="/login" var="login"/>
-<c:if test="${isAuthenticated}"><a href="${logout}">Log out</a></c:if>
-<c:if test="${!isAuthenticated}"><a href="${login}">Log in</a></c:if>
-
-<jsp:doBody/>
+<div id="body">
+    <jsp:doBody/>
+</div>
 </body>
 </html>

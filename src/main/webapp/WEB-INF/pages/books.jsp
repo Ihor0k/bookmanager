@@ -8,7 +8,7 @@
 
     <jsp:body>
         <c:if test="${!empty bookList}">
-            <h2>Book List</h2>
+            <h3>Book List</h3>
             <table class="tg">
                 <tr>
                     <th width="20">ID</th>
@@ -36,7 +36,7 @@
             </table>
         </c:if>
 
-        <h2><a href="<c:url value="/book/new"/>">Add a Book</a></h2>
+        <h3><a href="<c:url value="/book/new"/>">Add a Book</a></h3>
 
     </jsp:body>
 </page:template>

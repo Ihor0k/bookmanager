@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+}
+
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.tg td {
+    word-break: normal;
+    padding: 10px 5px;
+    border: 1px solid #ccc;
+}
+
+.tg th {
+    word-break: normal;
+    padding: 10px 5px;
+    border: 1px solid #ccc;
+    font-weight: normal;
+    background-color: #f0f0f0;
+}
+
+#body {
+    margin: 10px;
+}
+
+#header {
+    padding: 0;
+    background: #ccc;
+    width: auto;
+    height: 25px;
+    margin: 0;
+}
+
+#header ul {
+    padding: 4px;
+}
+
+#header ul li {
+    display: inline;
+}
+
+#greeting {
+    float: left;
+    padding-left: 25px;
+}
+
+#log_text {
+    float: right;
+    padding-right: 25px;
+}
