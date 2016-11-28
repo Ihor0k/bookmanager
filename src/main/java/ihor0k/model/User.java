@@ -27,6 +27,9 @@ public class User implements UserDetails{
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Book> books;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Comment> comments;
+
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
@@ -68,6 +71,14 @@ public class User implements UserDetails{
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

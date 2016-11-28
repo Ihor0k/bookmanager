@@ -18,5 +18,6 @@
 
         <mapping class="ihor0k.model.Book"/>
         <mapping class="ihor0k.model.User"/>
+        <mapping class="ihor0k.model.Comment"/>
     </session-factory>
 </hibernate-configuration>

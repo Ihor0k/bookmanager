@@ -1,6 +1,7 @@
 package ihor0k.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -25,6 +26,9 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false)
     private User user;
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    private Set<Comment> comments;
 
     public Book() {
     }
@@ -83,6 +87,14 @@ public class Book {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override
